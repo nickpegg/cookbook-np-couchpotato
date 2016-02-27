@@ -1,0 +1,23 @@
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 1024
+
+provisioner:
+  name: chef_zero
+
+# Uncomment the following verifier to leverage Inspec instead of Busser (the
+# default verifier)
+# verifier:
+#   name: inspec
+
+platforms:
+  - name: debian-8.2
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[np-couchpotato::default]
+    attributes:
