@@ -12,4 +12,7 @@ describe 'np-couchpotato::default' do
   end
 
   subject { @chef_run }
+
+  it { is_expected.to include_recipe('np-couchpotato::install') }
+  it { is_expected.to include_recipe('np-couchpotato::configure') }
 end
