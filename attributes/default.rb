@@ -14,9 +14,10 @@ default[:np_couchpotato].tap do |cp|
   cp[:repo] = 'https://github.com/CouchPotato/CouchPotatoServer.git'
   cp[:ref] = 'master'
 
+  ### NOTE: The below attributes aren't used yet, will be if I write a configure recipe
   # renaming settings
   cp[:renamer].tap do |r|
-    r[:from] = '/var/lib/usenet/downloads'  # TODO: figure out default sab download location
+    r[:from] = '/var/lib/usenet/downloads' # TODO: figure out default sab download location
     r[:to] = '/var/lib/movies'
   end
 
