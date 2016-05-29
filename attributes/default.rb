@@ -5,14 +5,13 @@ default[:np_couchpotato].tap do |cp|
   cp[:system_user] = 'couchpotato'
   cp[:system_group] = 'usenet'
 
+  cp[:version] = '3.0.1'
+  cp[:checksum] = 'f08f9c6ac02f66c6667f17ded1eea4c051a62bbcbadd2a8673394019878e92f7'
+
   # Web interface username
   cp[:username] = 'couchpotato'
 
   cp[:port] = 5050
-
-  # Source install settings
-  cp[:repo] = 'https://github.com/CouchPotato/CouchPotatoServer.git'
-  cp[:ref] = 'master'
 
   ### NOTE: The below attributes aren't used yet, will be if I write a configure recipe
   # renaming settings
