@@ -10,8 +10,9 @@ it. It's public in hopes that maybe it's of use to someone, either directly
 with its content or seeing how I do things with Chef.
 
 ## Testing
+It's assumed that you have chefdk installed.
+
 ```bash
-bundle install --path .bundle
-bundle exec rake
-bundle exec kitchen test
+chef exec rake
+chef exec kitchen test
 ```
