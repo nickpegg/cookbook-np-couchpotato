@@ -39,7 +39,7 @@ describe 'np-couchpotato::install' do
     )
   end
 
-  it { is_expected.to create_remote_file(::File.join(Chef::Config[:cache_path], 'CouchPotatoServer.tar.gz')) }
+  it { is_expected.to create_remote_file(::File.join(Chef::Config[:cache_path], 'CouchPotatoServer-3.0.1.tar.gz')) }
 
   it do
     is_expected.to enable_poise_service('couchpotato').with(
@@ -48,6 +48,4 @@ describe 'np-couchpotato::install' do
       command: '/opt/couchpotato/CouchPotato.py'
     )
   end
-
-  it { is_expected.to start_poise_service('couchpotato') }
 end
