@@ -1,15 +1,16 @@
 ---
 driver:
-  name: vagrant
-  customize:
-    memory: 1024
+  name: docker
+  use_sudo: false
+  provision_command: apt-get install -y curl wget net-tools
 
 provisioner:
   name: chef_zero
 
 platforms:
-  - name: debian-8.2
+  - name: debian-8
   - name: ubuntu-14.04
+  - name: ubuntu-16.04
 
 suites:
   - name: default

@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'berkshelf'
+gem 'chef', '>= 12.10.24'
 gem 'chefspec'
 gem 'serverspec'
 gem 'test-kitchen'
 gem 'kitchen-vagrant'
+gem 'kitchen-docker'
 gem 'rubocop'
 gem 'rake'
