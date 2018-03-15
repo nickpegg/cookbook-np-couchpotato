@@ -9,7 +9,10 @@ cache:
 
 addons:
   apt:
-    packages: chefdk
+    sources:
+      - chef-current-trusty
+    packages:
+      - chefdk
 
 services:
   - docker
