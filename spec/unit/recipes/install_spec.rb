@@ -33,20 +33,13 @@ describe 'np-couchpotato::install' do
   end
 
   it do
-    is_expected.to deploy_application('/opt/couchpotato').with(
+    is_expected.to create_directory('/opt/couchpotato').with(
       owner: 'couchpotato',
       group: 'usenet'
     )
   end
 
-  it do
-    is_expected.to sync_git('/opt/couchpotato').with(
-      repo: 'https://github.com/CouchPotato/CouchPotatoServer.git',
-      revision: 'master',
-      user: 'couchpotato',
-      group: 'usenet'
-    )
-  end
+  it { is_expected.to create_remote_file(::File.join(Chef::Config[:cache_path], 'CouchPotatoServer-3.0.1.tar.gz')) }
 
   it do
     is_expected.to enable_poise_service('couchpotato').with(
@@ -55,6 +48,4 @@ describe 'np-couchpotato::install' do
       command: '/opt/couchpotato/CouchPotato.py'
     )
   end
-
-  it { is_expected.to start_poise_service('couchpotato') }
 end

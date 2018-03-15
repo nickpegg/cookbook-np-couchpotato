@@ -27,21 +27,34 @@ poise_service_user node[:np_couchpotato][:system_user] do
   home node[:np_couchpotato][:install_path]
 end
 
-application node[:np_couchpotato][:install_path] do
+directory node[:np_couchpotato][:install_path] do
   owner node[:np_couchpotato][:system_user]
   group node[:np_couchpotato][:system_group]
+  mode 0755
+end
 
-  git do
-    repo node[:np_couchpotato][:repo]
-    revision node[:np_couchpotato][:ref]
+directory ::File.join(Chef::Config[:cache_path])
 
-    user node[:np_couchpotato][:system_user]
-    group node[:np_couchpotato][:system_group]
-  end
+version = node[:np_couchpotato][:version]
+tarball_path = ::File.join(Chef::Config[:cache_path], "CouchPotatoServer-#{version}.tar.gz")
+remote_file tarball_path do
+  source "https://codeload.github.com/CouchPotato/CouchPotatoServer/tar.gz/build/#{version}"
+  checksum node[:np_couchpotato][:checksum]
+
+  notifies :run, 'execute[extract couchpotato]', :immediately
+end
+
+execute 'extract couchpotato' do
+  action :nothing
+  command "tar -xzf '#{tarball_path}' --strip-components 1"
+  cwd node[:np_couchpotato][:install_path]
+
+  # Only restart if it's running to avoid a race condition on first start
+  notifies :restart, 'poise_service[couchpotato]', :delayed if `ps aux`.include? 'couchpotato'
 end
 
 poise_service 'couchpotato' do
-  action [:enable, :start]
+  action :enable
 
   user node[:np_couchpotato][:system_user]
   directory node[:np_couchpotato][:install_path]
