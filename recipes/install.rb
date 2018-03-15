@@ -10,14 +10,15 @@ include_recipe 'apt'
 
 package 'git'
 
-include_recipe 'python'
 include_recipe 'build-essential'
+
+python_runtime '2'
 
 # Required Python modules
 package %w(libffi-dev libssl-dev libxml2-dev)
 
 %w(lxml pyopenssl).each do |mod|
-  python_pip mod do
+  python_package mod do
     action [:install, :upgrade]
   end
 end
