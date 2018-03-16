@@ -3,7 +3,7 @@ require 'chefspec/berkshelf'
 
 module SpecHelper
   def memoized_runner(recipe)
-    @runner ||= begin
+    @memoized_runner ||= begin
       runner = ChefSpec::SoloRunner.new
       runner.converge recipe
     end
