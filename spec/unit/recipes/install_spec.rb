@@ -13,16 +13,16 @@ describe 'np-couchpotato::install' do
 
   subject { @chef_run }
 
-  %w(apt build-essential python).each do |recipe|
+  %w[apt build-essential].each do |recipe|
     it { is_expected.to include_recipe recipe }
   end
 
   it { is_expected.to install_package 'git' }
-  it { is_expected.to install_package %w(libffi-dev libssl-dev libxml2-dev) }
+  it { is_expected.to install_package %w[libffi-dev libssl-dev libxml2-dev] }
 
-  %w(lxml pyopenssl).each do |mod|
-    it { is_expected.to install_python_pip mod }
-    it { is_expected.to upgrade_python_pip mod }
+  %w[lxml pyopenssl].each do |mod|
+    it { is_expected.to install_python_package mod }
+    it { is_expected.to upgrade_python_package mod }
   end
 
   it do

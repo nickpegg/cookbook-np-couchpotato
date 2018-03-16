@@ -15,11 +15,11 @@ include_recipe 'build-essential'
 python_runtime '2'
 
 # Required Python modules
-package %w(libffi-dev libssl-dev libxml2-dev)
+package %w[libffi-dev libssl-dev libxml2-dev]
 
-%w(lxml pyopenssl).each do |mod|
+%w[lxml pyopenssl].each do |mod|
   python_package mod do
-    action [:install, :upgrade]
+    action %i[install upgrade]
   end
 end
 
@@ -31,7 +31,7 @@ end
 directory node[:np_couchpotato][:install_path] do
   owner node[:np_couchpotato][:system_user]
   group node[:np_couchpotato][:system_group]
-  mode 0755
+  mode '0755'
 end
 
 directory ::File.join(Chef::Config[:cache_path])
